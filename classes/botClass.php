@@ -26,18 +26,20 @@ class botClass{
                 $senderId = $input['senderId'];
                 //var_dump($message);exit;
                 $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$this->accessToken;
+                $output = null;
 
-                if ($message == "how do i know if i have stds?"){
-                    $output = "The only way to know if you or a partner has an STD is to go for a test.";
+                switch($message){ //Switch on the messages received and determine your output (message to sent back)
+                    case  "hello":
+                        $output = "How are you?";
+                        break;
+                    case "how are you?":
+                        $output = "I am fine";
+                        break;
+                    default:
+                        $output = "Hi";
                 }
-                else if ($message == "how do i know"){
-                        $output = "hello";
-                }else if ($message == "I am sorry"){
-                        $output = "Fuck off and allow this bot rest";
 
-                }else {
-                        $output = "Fuck,what is you saying?";
-                }
+
                     //Using curl to send messages
 
                     /*initialize curl*/
@@ -58,6 +60,8 @@ class botClass{
                     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                     curl_exec($ch); // user will get the message
+                    curl_close($ch);
+
 
         }
         catch(Exception $ex) {
