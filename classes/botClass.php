@@ -59,7 +59,9 @@ class botClass{
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
                     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_exec($ch); // user will get the message
+                    if ($message != "") {
+                        curl_exec($ch); // user will get the message
+                    }
                     curl_close($ch);
 
 
